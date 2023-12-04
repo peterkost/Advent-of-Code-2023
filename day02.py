@@ -1,4 +1,4 @@
-from utils import getLinesFor
+from utils import Part, getLinesFor
 
 
 class MAX:
@@ -61,8 +61,15 @@ def sumOfValidGameIds(games: list[Game]) -> int:
             sum += game.id
     return sum
 
+def sumOfPowerSets(games: list[Game]) -> int:
+    sum = 0
+    for game in games:
+        sum += game.maxBlue * game.maxGreen * game.maxRed
+    return sum
 
-games = inputToGame()
-sum = sumOfValidGameIds(games)
-print(sum)
+def solve(part: Part):
+    games = inputToGame()
+    sum = sumOfValidGameIds(games) if part == Part.ONE else sumOfPowerSets(games)
+    print(sum)
 
+solve(Part.TWO)
