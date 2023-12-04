@@ -1,7 +1,12 @@
-from utils import getLinesFor
+from utils.fileHelper import getLinesFor
+from utils.misc import Part
 
 
-PART1 = False
+PART = Part.TWO 
+
+FIRST_LETTERS = set(["o", "t", "f", "s", "e", "n"])
+POSSIBLE_NUMS = {"o":["one"], "t":["two", "three"], "f":["four", "five"], "s":["six", "seven"], "e":["eight"], "n":["nine"]}
+WORD_TO_NUM = {"one": "1", "two": "2", "three":"3", "four":"4", "five":"5", "six":"6", "seven":"7", "eight":"8", "nine":"9"}
 
 
 def sumCalibrationValues(lines: list[str]) -> int:
@@ -24,15 +29,11 @@ def getDigit(line: str, first: bool) -> str:
 
 # returns [isDigit, digitAsNumeralString]
 def digit(line: str, i) -> tuple[bool, str]:
-    if PART1 or line[i].isnumeric():
+    if PART == Part.ONE or line[i].isnumeric():
         return (line[i].isnumeric(), line[i])
     else:
         return isWordADigit(line, i) 
 
-# PART 2
-FIRST_LETTERS = set(["o", "t", "f", "s", "e", "n"])
-POSSIBLE_NUMS = {"o":["one"], "t":["two", "three"], "f":["four", "five"], "s":["six", "seven"], "e":["eight"], "n":["nine"]}
-WORD_TO_NUM = {"one": "1", "two": "2", "three":"3", "four":"4", "five":"5", "six":"6", "seven":"7", "eight":"8", "nine":"9"}
 def isWordADigit(line: str, i) -> tuple[bool, str]:
     if line[i] in FIRST_LETTERS:
         for number in POSSIBLE_NUMS[line[i]]:
@@ -41,8 +42,9 @@ def isWordADigit(line: str, i) -> tuple[bool, str]:
                 return (True, WORD_TO_NUM[number])
     return (False, "")
 
-lines = getLinesFor(day="01")
-sum = sumCalibrationValues(lines)
-print(sum)
+def solve():
+    lines = getLinesFor(day="01")
+    sum = sumCalibrationValues(lines)
+    print(sum)
 
-
+solve()
