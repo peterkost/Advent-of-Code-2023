@@ -1,9 +1,9 @@
+from utils import getLinesFor
+
+
 PART1 = False
 
-def getLines() -> list[str]:
-    input = open("day01-input.txt", "r")
-    return input.readlines()
-    
+
 def sumCalibrationValues(lines: list[str]) -> int:
     res = 0
     for line in lines:
@@ -41,7 +41,7 @@ def isWordADigit(line: str, i) -> tuple[bool, str]:
                 return (True, WORD_TO_NUM[number])
     return (False, "")
 
-lines = getLines()
+lines = getLinesFor(day="01")
 sum = sumCalibrationValues(lines)
 print(sum)
 
