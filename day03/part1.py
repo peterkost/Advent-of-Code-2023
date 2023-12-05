@@ -1,6 +1,6 @@
-from utils.fileHelper import getLinesFor, writeListToFile
-from utils.misc import Part
+from utils.fileHelper import getLinesFor
 from typing import List
+
 
 def inputToList(sample: bool = False) -> list[list[str]]:
     res = []
@@ -46,10 +46,10 @@ def isSymbol(input: list[list[str]], x, y) -> bool:
     char = input[x][y]
     return not char == "." and not char.isnumeric()
 
-def solve(part: Part):
+def solve():
     listInput = inputToList()
     res = sumPartNumber(listInput)
     print(res)
 
 
-solve(Part.ONE)
+solve()
