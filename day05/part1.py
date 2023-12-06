@@ -1,14 +1,21 @@
 from typing import List, Tuple
 from utils.fileHelper import getLinesFor
 
+
 def seedToLocation(seed: int, chain: List[List[Tuple[int, int, int]]]) -> int:
     cur = seed
     for map in chain:
-        for interval in map:
-            start, end, change = interval
+        l, r = 0, len(map) - 1
+        while l <= r:
+            m = (r + l) // 2
+            start, end, change = map[m]
             if start <= cur <= end:
                 cur += change
                 break
+            if end < cur:
+                l = m + 1
+            else:
+                r = m - 1
     return cur
 
 def getSeeds(line: str) -> List[int]:
@@ -24,7 +31,7 @@ def getChainOfMaps(lines: List[str]) ->List[List[Tuple[int, int, int]]]:
         for e in map:
             asRange = convertInputToRange(e)
             formatedMap.append(asRange)
-        res.append(formatedMap)
+        res.append(sorted(formatedMap))
 
     return res
 
@@ -52,7 +59,7 @@ def convertInputToRange(input: List[int]) -> Tuple[int, int, int]:
 
 
 def getAndPrintAnswer():
-    lines = getLinesFor(day="05", sample=False)
+    lines = getLinesFor(day="05", sample=True)
 
     seeds = getSeeds(lines[0])
     chainOfMaps = getChainOfMaps(lines[2:])
