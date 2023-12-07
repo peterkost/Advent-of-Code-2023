@@ -1,5 +1,8 @@
 from typing import List, Tuple
 from utils.fileHelper import getLinesFor
+from utils.misc import Part
+
+PART = Part.TWO
 
 # (time, distance)
 def parseInput(input: List[str]) -> List[Tuple[int, int]]:
@@ -8,8 +11,13 @@ def parseInput(input: List[str]) -> List[Tuple[int, int]]:
         elements = line.split()
         splitLines.append(elements[1:])
     res = []
-    for i in range(len(splitLines[0])):
-        res.append((int(splitLines[0][i]), int(splitLines[1][i])))
+    if PART == Part.ONE:
+        for i in range(len(splitLines[0])):
+            res.append((int(splitLines[0][i]), int(splitLines[1][i])))
+    else:
+        time = int("".join(splitLines[0]))
+        distance = int("".join(splitLines[1]))
+        res = [(time, distance)]
     return res
 
 def getMinHoldTime(time: int, distance: int) -> int:
@@ -40,7 +48,7 @@ def isWinningHoldTime(time: int, holdTime: int, recordDistance: int) -> int:
     distanceTraveled = holdTime * (time - holdTime)
     return distanceTraveled > recordDistance
 
-def solveDay06Part1():
+def solveDay06():
     lines = getLinesFor("06", sample=False)
     races = parseInput(lines)
     res = 1
@@ -48,4 +56,5 @@ def solveDay06Part1():
         res *= getMaxHoldTime(race[0], race[1]) - getMinHoldTime(race[0], race[1]) + 1
     print(res)
 
-solveDay06Part1()
+solveDay06()
+
