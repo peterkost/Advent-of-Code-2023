@@ -1,6 +1,8 @@
-from collections import Counter
+from collections import Counter, defaultdict
 from enum import Enum
+from typing import List
 
+PART = 2
 
 class Type(Enum):
     HIGH_CARD = 1
@@ -36,7 +38,7 @@ class Hand:
                 case "Q":
                     res += "X"
                 case "J":
-                    res += "W"
+                    res += "W" if PART == 1 else "M"
                 case "T":
                     res += "V"
                 case "9":
@@ -63,7 +65,7 @@ class Hand:
 
     @staticmethod
     def _getType(cards: str) -> Type:
-        cardCount = list(Counter(cards).values())
+        cardCount = Hand._getCardCount(cards)
         if 5 in cardCount:
             return Type.FIVE_OF_A_KIND
         elif 4 in cardCount:
@@ -78,3 +80,26 @@ class Hand:
             return Type.ONE_PAIR
         else:
             return Type.HIGH_CARD
+
+    @staticmethod
+    def _getCardCount(cards: str) -> List[int]:
+        if PART == 1:
+            return list(Counter(cards).values())
+        else:
+            print(cards)
+            count = defaultdict(int)
+            jCount = 0
+            for card in cards:
+                if card == "J":
+                    jCount += 1
+                else:
+                    count[card] += 1
+            res = list(count.values())
+            res.sort(reverse=True)
+            if res:
+                res[0] += jCount
+            else: 
+                res = [jCount]
+            return  res
+
+

@@ -9,9 +9,10 @@ def sumHands(hands: List[Hand]) -> int:
     return res
 
 def solve():
-    lines = getLinesFor("07", sample=True)
+    lines = getLinesFor("07", sample=False)
     hands = [Hand(line) for line in lines]
     hands.sort(reverse=True)
     [print(card) for card in hands]
     print(sumHands(hands))
 
+solve()
