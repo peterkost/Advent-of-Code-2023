@@ -1,12 +1,23 @@
 from typing import List
 from utils.fileHelper import getLinesFor
 
+PART = 2
+SAMPLE = False
+
 def estimateNextValueOf(line: str) -> int:
     values = extrapolateValuesOf(line)
     botVal = 0
     for i in range(len(values) - 1, -1, -1):
         botVal += values[i][-1]
     return botVal
+
+def estimatePrevValueOf(line: str) -> int:
+    values = extrapolateValuesOf(line)
+    botVal = 0
+    for i in range(len(values) - 1, -1, -1):
+        botVal = values[i][0] - botVal 
+    return botVal
+
 
 def extrapolateValuesOf(line: str) -> List[List[int]]:
     nums = [int(n) for n in line.split()]
@@ -22,8 +33,9 @@ def extrapolateValuesOf(line: str) -> List[List[int]]:
 
 
 def solve():
-    lines = getLinesFor(day="09", sample=False)
-    res = sum([estimateNextValueOf(line) for line in lines])
+    lines = getLinesFor(day="09", sample=SAMPLE)
+    res = sum([estimateNextValueOf(line) if PART == 1 else estimatePrevValueOf(line) for line in lines])
     print(res)
+
 
 solve()
