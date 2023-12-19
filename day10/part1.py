@@ -21,9 +21,10 @@ def makeMoveOn(maze: Maze) -> None:
 
 
 def getLoopDistance(maze: Maze) -> int:
+    makeMoveOn(maze)
     distance = 1
 
-    while maze.getCurrentSymbol() != "S":
+    while not maze.onStart():
         makeMoveOn(maze)
         distance += 1
 
@@ -35,4 +36,3 @@ def solve():
     distance = getLoopDistance(maze)
     print(distance // 2)
 
-solve()

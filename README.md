@@ -1,3 +1,9 @@
-Surely this is the year I finish this thing
+This year for sure edition™
 
-Solutions executed in Python 3.11.6
+
+# Journal
+## 2023/12/19 - Day 10 Part 2
+Stuck on this one for 4 days. Didn't think I could do it, but we are so back!
+I figured out the scanline idea myself, but couldn't get it to work properly. 
+Mainly I was missing the part about "U" and "non-U" bends. This [comment](https://old.reddit.com/r/adventofcode/comments/18f1sgh/2023_day_10_part_2_advise_on_part_2/kcripvi/) was really
+helpful for getting me back on track.
