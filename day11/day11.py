@@ -1,13 +1,19 @@
 from day11.Cosmos import Cosmos
 from utils.misc import Coords
 
+# part 1 = 2, part 2 = 1000000
+EXPANSION_MULTIPLIER = 1000000
+
 
 def getSumOfShortestPaths(cosmos: Cosmos) -> int:
     sum = 0
     coords, lenCoords = cosmos.galaxyCoords, len(cosmos.galaxyCoords)
     for i in range(lenCoords):
         for j in range(i + 1, lenCoords):
-            sum += getDistanceBetween(coords[i], coords[j])
+            emptySpaces = cosmos.getNumEmptyBetween(coords[i], coords[j])
+            addedSteps = emptySpaces  * (EXPANSION_MULTIPLIER - 1)
+            res = getDistanceBetween(coords[i], coords[j]) + addedSteps
+            sum +=  res
     return sum
 
 
